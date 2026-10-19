@@ -186,7 +186,7 @@ function getDefaultData(): DatabaseSchema {
       businessHours: 'Monday – Saturday: 9:30 AM – 7:30 PM, Sunday: By Appointment',
       heroHeadline: 'Find Your Dream Property with Shri Goyal Associates',
       heroSubtitle: 'Trusted Guidance. Exceptional Properties. Lasting Relationships.',
-      heroBgImage: '/src/assets/images/hero_luxury_villa_1792413398505.jpg',
+      heroBgImage: '/images/hero_luxury_villa_1792413398505.jpg',
       heroCta1Text: 'Explore Properties',
       heroCta1Link: '/properties',
       heroCta2Text: 'Contact Us',
@@ -201,7 +201,7 @@ function getDefaultData(): DatabaseSchema {
       aboutSubtitle: 'Built on transparency, local authority, and generational client trust.',
       aboutText: 'Founded on absolute transparency and unmatched regional insight, Shri Goyal Associates is Mathura and NCR’s premier real estate consultancy. For over two decades, our advisory firm has guided distinguished families, business entrepreneurs, and institutional investors through high-value residential acquisitions, commercial land developments, and legally verified plot transactions. Every transaction is backed by exhaustive legal title auditing, Vastu-informed spatial planning, and transparent negotiations.',
       aboutExperienceYears: '24+',
-      aboutImage: '/src/assets/images/about_architecture_craft_1792413399389.jpg',
+      aboutImage: '/images/about_architecture_craft_1792413399389.jpg',
       whyChooseHeading: 'Why Discerning Clients Choose Shri Goyal Associates',
       whyChooseSubtitle: 'A legacy of meticulous diligence, verified titles, and white-glove advisory.',
       contactHeading: 'Let\'s Find the Right Property for You',
@@ -233,11 +233,11 @@ function getDefaultData(): DatabaseSchema {
         description: 'An architectural masterpiece situated in prime Mathura near Narsi Vihar. Features private swimming pool, double-height Italian marble foyer, bespoke wooden accents, landscaped courtyard, 4-car private parking, and complete smart home automation.',
         amenities: ['Private Swimming Pool', 'Landscaped Garden', 'Double Height Living', '100% Power Backup', '24/7 Gated Security', 'Vastu Compliant', 'Clear Title Deed', 'Servant Quarters'],
         images: [
-          '/src/assets/images/hero_luxury_villa_1792413398505.jpg',
-          '/src/assets/images/property_penthouse_modern_1792413400841.jpg',
-          '/src/assets/images/about_architecture_craft_1792413399389.jpg'
+          '/images/hero_luxury_villa_1792413398505.jpg',
+          '/images/property_penthouse_modern_1792413400841.jpg',
+          '/images/about_architecture_craft_1792413399389.jpg'
         ],
-        primaryImage: '/src/assets/images/hero_luxury_villa_1792413398505.jpg',
+        primaryImage: '/images/hero_luxury_villa_1792413398505.jpg',
         featured: true,
         published: true,
         status: 'Available',
@@ -262,11 +262,11 @@ function getDefaultData(): DatabaseSchema {
         description: 'Panoramic views overlooking the sacred skyline and lush green expressway corridor. Spans an expansive duplex layout with floor-to-ceiling soundproof glass, open sky deck with private plunge pool, and designer modular kitchen.',
         amenities: ['Sky Deck & Plunge Pool', 'Panoramic Temple Skyline Views', 'High-speed Elevators', 'Clubhouse & Gym', 'Covered Reserved Parking', '24/7 CCTV & Security', 'Piped Gas Connection'],
         images: [
-          '/src/assets/images/property_penthouse_modern_1792413400841.jpg',
-          '/src/assets/images/about_architecture_craft_1792413399389.jpg',
-          '/src/assets/images/hero_luxury_villa_1792413398505.jpg'
+          '/images/property_penthouse_modern_1792413400841.jpg',
+          '/images/about_architecture_craft_1792413399389.jpg',
+          '/images/hero_luxury_villa_1792413398505.jpg'
         ],
-        primaryImage: '/src/assets/images/property_penthouse_modern_1792413400841.jpg',
+        primaryImage: '/images/property_penthouse_modern_1792413400841.jpg',
         featured: true,
         published: true,
         status: 'Available',
@@ -291,10 +291,10 @@ function getDefaultData(): DatabaseSchema {
         description: 'High-footfall commercial property at the bustling Mandi Choraha junction. Ideal for bank branches, retail anchor stores, healthcare diagnostic centres, or corporate regional headquarters with dual road frontage and high commercial rental yield.',
         amenities: ['Dual Road Frontage', 'Basement Customer Parking', 'Heavy Power Load Sanction', 'Fire Safety NOC', 'High Footfall Zone', 'High Rental Yield Potential'],
         images: [
-          '/src/assets/images/about_architecture_craft_1792413399389.jpg',
-          '/src/assets/images/hero_luxury_villa_1792413398505.jpg'
+          '/images/about_architecture_craft_1792413399389.jpg',
+          '/images/hero_luxury_villa_1792413398505.jpg'
         ],
-        primaryImage: '/src/assets/images/about_architecture_craft_1792413399389.jpg',
+        primaryImage: '/images/about_architecture_craft_1792413399389.jpg',
         featured: true,
         published: true,
         status: 'Available',
@@ -319,10 +319,10 @@ function getDefaultData(): DatabaseSchema {
         description: 'Freehold, 300 sq. yard east-facing residential plot in a premium gated township. Complete underground electrical wiring, wide 40-foot paved blacktop roads, dedicated park frontage, and immediate municipal registry verification.',
         amenities: ['East Facing Vastu', 'Gated Community with Guardhouse', 'Wide 40ft Internal Roads', 'Underground Utilities', 'Immediate Registry & Mutation', 'Park Facing'],
         images: [
-          '/src/assets/images/hero_luxury_villa_1792413398505.jpg',
-          '/src/assets/images/about_architecture_craft_1792413399389.jpg'
+          '/images/hero_luxury_villa_1792413398505.jpg',
+          '/images/about_architecture_craft_1792413399389.jpg'
         ],
-        primaryImage: '/src/assets/images/hero_luxury_villa_1792413398505.jpg',
+        primaryImage: '/images/hero_luxury_villa_1792413398505.jpg',
         featured: false,
         published: true,
         status: 'Available',
@@ -347,9 +347,9 @@ function getDefaultData(): DatabaseSchema {
         description: '1 Acre contiguous industrial/commercial plot with direct expressway connectivity. High strategic appreciation near upcoming Jewar International Airport link and logistics hub.',
         amenities: ['Direct Highway Frontage', 'Industrial Zone Clearance', 'Clear Title Record', 'Heavy Vehicle Ingress', 'Water & Grid Access'],
         images: [
-          '/src/assets/images/hero_luxury_villa_1792413398505.jpg'
+          '/images/hero_luxury_villa_1792413398505.jpg'
         ],
-        primaryImage: '/src/assets/images/hero_luxury_villa_1792413398505.jpg',
+        primaryImage: '/images/hero_luxury_villa_1792413398505.jpg',
         featured: false,
         published: true,
         status: 'Available',
@@ -374,10 +374,10 @@ function getDefaultData(): DatabaseSchema {
         description: 'Fully furnished luxury residence in the most peaceful, tree-lined residential enclave of Mathura. Equipped with premium teak wood furnishings, VRV air conditioning, and 24-hour maintenance team.',
         amenities: ['Fully Furnished Designer Interiors', 'VRV Air Conditioning', 'Covered Stilt Parking', 'Full Power Backup', 'Round-the-Clock Security'],
         images: [
-          '/src/assets/images/property_penthouse_modern_1792413400841.jpg',
-          '/src/assets/images/about_architecture_craft_1792413399389.jpg'
+          '/images/property_penthouse_modern_1792413400841.jpg',
+          '/images/about_architecture_craft_1792413399389.jpg'
         ],
-        primaryImage: '/src/assets/images/property_penthouse_modern_1792413400841.jpg',
+        primaryImage: '/images/property_penthouse_modern_1792413400841.jpg',
         featured: false,
         published: true,
         status: 'Available',
@@ -400,7 +400,7 @@ function getDefaultData(): DatabaseSchema {
         ],
         phone: '+91 9012792020',
         email: 'jgoyal@gmail.com',
-        photoUrl: '/src/assets/images/owner_portrait_one_1792413400191.jpg',
+        photoUrl: '/images/owner_portrait_one_1792413400191.jpg',
         linkedin: 'https://linkedin.com',
         twitter: 'https://twitter.com',
         orderIndex: 1,
@@ -421,7 +421,7 @@ function getDefaultData(): DatabaseSchema {
         ],
         phone: '+91 9012792020',
         email: 'jgoyal@gmail.com',
-        photoUrl: '/src/assets/images/owner_portrait_two_1792413400739.jpg',
+        photoUrl: '/images/owner_portrait_two_1792413400739.jpg',
         linkedin: 'https://linkedin.com',
         twitter: 'https://twitter.com',
         orderIndex: 2,
@@ -538,7 +538,7 @@ function getDefaultData(): DatabaseSchema {
         originalName: 'hero_luxury_villa.jpg',
         mimeType: 'image/jpeg',
         size: 524288,
-        url: '/src/assets/images/hero_luxury_villa_1792413398505.jpg',
+        url: '/images/hero_luxury_villa_1792413398505.jpg',
         category: 'hero',
         createdAt: '2026-03-01T00:00:00Z'
       },
@@ -548,7 +548,7 @@ function getDefaultData(): DatabaseSchema {
         originalName: 'about_architecture_craft.jpg',
         mimeType: 'image/jpeg',
         size: 421000,
-        url: '/src/assets/images/about_architecture_craft_1792413399389.jpg',
+        url: '/images/about_architecture_craft_1792413399389.jpg',
         category: 'general',
         createdAt: '2026-03-01T00:00:00Z'
       },
@@ -558,7 +558,7 @@ function getDefaultData(): DatabaseSchema {
         originalName: 'owner_portrait_one.jpg',
         mimeType: 'image/jpeg',
         size: 380000,
-        url: '/src/assets/images/owner_portrait_one_1792413400191.jpg',
+        url: '/images/owner_portrait_one_1792413400191.jpg',
         category: 'owner',
         createdAt: '2026-03-01T00:00:00Z'
       },
@@ -568,7 +568,7 @@ function getDefaultData(): DatabaseSchema {
         originalName: 'owner_portrait_two.jpg',
         mimeType: 'image/jpeg',
         size: 360000,
-        url: '/src/assets/images/owner_portrait_two_1792413400739.jpg',
+        url: '/images/owner_portrait_two_1792413400739.jpg',
         category: 'owner',
         createdAt: '2026-03-01T00:00:00Z'
       },
@@ -578,7 +578,7 @@ function getDefaultData(): DatabaseSchema {
         originalName: 'property_penthouse_modern.jpg',
         mimeType: 'image/jpeg',
         size: 610000,
-        url: '/src/assets/images/property_penthouse_modern_1792413400841.jpg',
+        url: '/images/property_penthouse_modern_1792413400841.jpg',
         category: 'property',
         createdAt: '2026-03-01T00:00:00Z'
       }

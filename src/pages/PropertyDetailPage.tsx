@@ -17,6 +17,7 @@ import {
 import { Property } from '../types';
 import { useSettings } from '../context/SettingsContext';
 import { EnquiryModal } from '../components/EnquiryModal';
+import { apiFetch } from '../services/apiBridge';
 
 interface PropertyDetailPageProps {
   propertyId: string;
@@ -35,7 +36,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({ property
     async function loadProperty() {
       try {
         setLoading(true);
-        const res = await fetch(`/api/properties/${propertyId}`);
+        const res = await apiFetch(`/api/properties/${propertyId}`);
         if (res.ok) {
           const data = await res.json();
           setProperty(data);
@@ -155,7 +156,10 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({ property
               alt={property.title}
               referrerPolicy="no-referrer"
               onError={(e) => {
-                e.currentTarget.src = '/src/assets/images/hero_luxury_villa_1792413398505.jpg';
+                const fallback = '/images/hero_luxury_villa_1792413398505.jpg';
+                if (e.currentTarget.src !== window.location.origin + fallback) {
+                  e.currentTarget.src = fallback;
+                }
               }}
               className="w-full h-full object-cover transition-all duration-500"
             />
@@ -178,7 +182,10 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({ property
                     alt={`Thumbnail ${idx + 1}`}
                     referrerPolicy="no-referrer"
                     onError={(e) => {
-                      e.currentTarget.src = '/src/assets/images/hero_luxury_villa_1792413398505.jpg';
+                      const fallback = '/images/hero_luxury_villa_1792413398505.jpg';
+                      if (e.currentTarget.src !== window.location.origin + fallback) {
+                        e.currentTarget.src = fallback;
+                      }
                     }}
                     className="w-full h-full object-cover"
                   />

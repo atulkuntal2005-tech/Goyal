@@ -34,6 +34,11 @@ async function startServer() {
     app.use(express.static(publicDir));
   }
 
+  const imagesDir = path.resolve(__dirname, 'public/images');
+  if (fs.existsSync(imagesDir)) {
+    app.use('/images', express.static(imagesDir));
+  }
+
   // Mount API Router
   app.use('/api', apiRouter);
 

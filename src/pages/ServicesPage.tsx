@@ -3,6 +3,7 @@ import { Home, Building2, MapPin, Key, TrendingUp, Compass, ArrowRight, Phone, M
 import { Service } from '../types';
 import { useSettings } from '../context/SettingsContext';
 import { EnquiryModal } from '../components/EnquiryModal';
+import { apiFetch } from '../services/apiBridge';
 
 const iconMap: Record<string, React.ReactNode> = {
   Home: <Home className="w-6 h-6" />,
@@ -28,7 +29,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
     async function loadServices() {
       try {
         setLoading(true);
-        const res = await fetch('/api/services');
+        const res = await apiFetch('/api/services');
         if (res.ok) {
           const data = await res.json();
           setServices(data);

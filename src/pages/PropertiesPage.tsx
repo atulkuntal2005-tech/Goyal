@@ -3,6 +3,7 @@ import { Search, Filter, RotateCcw } from 'lucide-react';
 import { Property } from '../types';
 import { PropertyCard } from '../components/PropertyCard';
 import { EnquiryModal } from '../components/EnquiryModal';
+import { apiFetch } from '../services/apiBridge';
 
 interface PropertiesPageProps {
   onNavigate: (page: string, param?: string) => void;
@@ -36,7 +37,7 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({ onNavigate, init
     async function fetchProperties() {
       try {
         setLoading(true);
-        const res = await fetch('/api/properties');
+        const res = await apiFetch('/api/properties');
         if (res.ok) {
           const data = await res.json();
           setProperties(data);

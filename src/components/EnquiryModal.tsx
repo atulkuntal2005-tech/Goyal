@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, CheckCircle2, AlertCircle, Send, Phone, MessageCircle } from 'lucide-react';
 import { Property } from '../types';
 import { useSettings } from '../context/SettingsContext';
+import { apiFetch } from '../services/apiBridge';
 
 interface EnquiryModalProps {
   isOpen: boolean;
@@ -45,7 +46,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
 
     try {
       setIsSubmitting(true);
-      const res = await fetch('/api/enquiries', {
+      const res = await apiFetch('/api/enquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

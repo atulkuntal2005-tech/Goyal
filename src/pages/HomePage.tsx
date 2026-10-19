@@ -17,6 +17,7 @@ import { useSettings } from '../context/SettingsContext';
 import { Property, Owner, Service, Testimonial } from '../types';
 import { PropertyCard } from '../components/PropertyCard';
 import { EnquiryModal } from '../components/EnquiryModal';
+import { apiFetch } from '../services/apiBridge';
 
 interface HomePageProps {
   onNavigate: (page: string, param?: string) => void;
@@ -54,10 +55,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       try {
         setLoading(true);
         const [propsRes, ownersRes, servicesRes, testRes] = await Promise.all([
-          fetch('/api/properties'),
-          fetch('/api/owners'),
-          fetch('/api/services'),
-          fetch('/api/testimonials')
+          apiFetch('/api/properties'),
+          apiFetch('/api/owners'),
+          apiFetch('/api/services'),
+          apiFetch('/api/testimonials')
         ]);
 
         if (propsRes.ok) setProperties(await propsRes.json());
@@ -89,7 +90,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
     try {
       setContactLoading(true);
-      const res = await fetch('/api/enquiries', {
+      const res = await apiFetch('/api/enquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -125,11 +126,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         {/* Background Image with Scrim */}
         <div className="absolute inset-0 z-0">
           <img
-            src={settings.heroBgImage || '/src/assets/images/hero_luxury_villa_1792413398505.jpg'}
+            src={settings.heroBgImage || '/images/hero_luxury_villa_1792413398505.jpg'}
             alt="Luxury Architectural Estate"
             referrerPolicy="no-referrer"
             onError={(e) => {
-              e.currentTarget.src = '/src/assets/images/hero_luxury_villa_1792413398505.jpg';
+              const fallback = '/images/hero_luxury_villa_1792413398505.jpg';
+              if (e.currentTarget.src !== window.location.origin + fallback) {
+                e.currentTarget.src = fallback;
+              }
             }}
             className="w-full h-full object-cover object-center scale-105 transition-transform duration-1000"
           />
@@ -337,11 +341,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           <div className="lg:col-span-4">
             <div className="relative rounded-3xl overflow-hidden border border-[#c5a880]/30 aspect-[3/4] shadow-2xl group">
               <img
-                src={settings.aboutImage || '/src/assets/images/about_architecture_craft_1792413399389.jpg'}
+                src={settings.aboutImage || '/images/about_architecture_craft_1792413399389.jpg'}
                 alt="Architecture and Interiors"
                 referrerPolicy="no-referrer"
                 onError={(e) => {
-                  e.currentTarget.src = '/src/assets/images/about_architecture_craft_1792413399389.jpg';
+                  const fallback = '/images/about_architecture_craft_1792413399389.jpg';
+                  if (e.currentTarget.src !== window.location.origin + fallback) {
+                    e.currentTarget.src = fallback;
+                  }
                 }}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
@@ -445,7 +452,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                         alt={owner.name}
                         referrerPolicy="no-referrer"
                         onError={(e) => {
-                          e.currentTarget.src = '/src/assets/images/owner_portrait_one_1792413400191.jpg';
+                          const fallback = '/images/owner_portrait_one_1792413400191.jpg';
+                          if (e.currentTarget.src !== window.location.origin + fallback) {
+                            e.currentTarget.src = fallback;
+                          }
                         }}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />

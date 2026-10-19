@@ -1,0 +1,725 @@
+import { SiteSettings, Property, Owner, Service, Testimonial, Enquiry, MediaItem } from '../types';
+
+const STORAGE_KEY = 'sga_local_database_v2';
+
+export interface LocalDbSchema {
+  siteSettings: SiteSettings;
+  properties: Property[];
+  owners: Owner[];
+  services: Service[];
+  testimonials: Testimonial[];
+  enquiries: Enquiry[];
+  media: MediaItem[];
+}
+
+export const initialLocalData: LocalDbSchema = {
+  siteSettings: {
+    id: 'default_settings',
+    businessName: 'Shri Goyal Associates',
+    tagline: 'Trusted Guidance. Exceptional Properties. Lasting Relationships.',
+    phone: '+91 9012792020',
+    whatsapp: '+91 9012792020',
+    email: 'jgoyal@gmail.com',
+    addressLine1: 'Mandi Choraha',
+    addressLine2: 'Near Narsi Vihar',
+    city: 'Mathura',
+    state: 'Uttar Pradesh',
+    pincode: '281004',
+    country: 'India',
+    officeLandmark: 'Near Narsi Vihar, Mandi Choraha, Mathura',
+    googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Mandi+Choraha+Near+Narsi+Vihar+Mathura+Uttar+Pradesh+281004',
+    googleMapsEmbedUrl: 'https://maps.google.com/maps?q=Mandi%20Choraha%2C%20Near%20Narsi%20Vihar%2C%20Mathura%2C%20Uttar%20Pradesh%20281004&t=&z=15&ie=UTF8&iwloc=&output=embed',
+    businessHours: 'Monday – Saturday: 9:30 AM – 7:30 PM, Sunday: By Appointment',
+    heroHeadline: 'Find Your Dream Property with Shri Goyal Associates',
+    heroSubtitle: 'Trusted Guidance. Exceptional Properties. Lasting Relationships.',
+    heroBgImage: '/images/hero_luxury_villa_1792413398505.jpg',
+    heroCta1Text: 'Explore Properties',
+    heroCta1Link: '/properties',
+    heroCta2Text: 'Contact Us',
+    heroCta2Link: '/contact',
+    heroStat1Number: '₹450 Cr+',
+    heroStat1Label: 'Portfolio Value Transacted',
+    heroStat2Number: '24+ Years',
+    heroStat2Label: 'Unbroken Legacy of Trust',
+    heroStat3Number: '1,200+',
+    heroStat3Label: 'Premium Properties & Plots Advised',
+    aboutHeading: 'Leading Luxury & Commercial Real Estate Advisory in Mathura & NCR',
+    aboutSubtitle: 'Built on transparency, local authority, and generational client trust.',
+    aboutText: 'Founded on absolute transparency and unmatched regional insight, Shri Goyal Associates is Mathura and NCR’s premier real estate consultancy. For over two decades, our advisory firm has guided distinguished families, business entrepreneurs, and institutional investors through high-value residential acquisitions, commercial land developments, and legally verified plot transactions. Every transaction is backed by exhaustive legal title auditing, Vastu-informed spatial planning, and transparent negotiations.',
+    aboutExperienceYears: '24+',
+    aboutImage: '/images/about_architecture_craft_1792413399389.jpg',
+    whyChooseHeading: 'Why Discerning Clients Choose Shri Goyal Associates',
+    whyChooseSubtitle: 'A legacy of meticulous diligence, verified titles, and white-glove advisory.',
+    contactHeading: 'Let\'s Find the Right Property for You',
+    contactDescription: 'Reach out to our leadership team for confidential consultations, personalized property shortlists, or to schedule a private site inspection.',
+    currency: 'INR',
+    maintenanceMode: false,
+    primaryColor: '#c5a880',
+    secondaryColor: '#0c0d11',
+    facebookUrl: 'https://facebook.com',
+    instagramUrl: 'https://instagram.com',
+    linkedinUrl: 'https://linkedin.com'
+  },
+  properties: [
+    {
+      id: 'prop-1',
+      title: 'The Sovereign Villa & Private Estate',
+      slug: 'the-sovereign-villa-private-estate',
+      price: 38500000,
+      priceDisplay: '₹3.85 Cr',
+      propertyType: 'Luxury Villa',
+      purpose: 'Sale',
+      location: 'Near Narsi Vihar, Mathura',
+      city: 'Mathura',
+      state: 'Uttar Pradesh',
+      pincode: '281004',
+      areaSqFt: 5200,
+      bedrooms: 5,
+      bathrooms: 6,
+      description: 'An architectural masterpiece situated in prime Mathura near Narsi Vihar. Features private swimming pool, double-height Italian marble foyer, bespoke wooden accents, landscaped courtyard, 4-car private parking, and complete smart home automation.',
+      amenities: ['Private Swimming Pool', 'Landscaped Garden', 'Double Height Living', '100% Power Backup', '24/7 Gated Security', 'Vastu Compliant', 'Clear Title Deed', 'Servant Quarters'],
+      images: [
+        '/images/hero_luxury_villa_1792413398505.jpg',
+        '/images/property_penthouse_modern_1792413400841.jpg',
+        '/images/about_architecture_craft_1792413399389.jpg'
+      ],
+      primaryImage: '/images/hero_luxury_villa_1792413398505.jpg',
+      featured: true,
+      published: true,
+      status: 'Available',
+      createdAt: '2026-02-15T10:00:00Z',
+      updatedAt: '2026-03-01T12:00:00Z'
+    },
+    {
+      id: 'prop-2',
+      title: 'Vrindavan Horizon Sky Penthouse',
+      slug: 'vrindavan-horizon-sky-penthouse',
+      price: 24500000,
+      priceDisplay: '₹2.45 Cr',
+      propertyType: 'Penthouse',
+      purpose: 'Sale',
+      location: 'Vrindavan Expressway Corridor, Mathura',
+      city: 'Mathura',
+      state: 'Uttar Pradesh',
+      pincode: '281121',
+      areaSqFt: 3800,
+      bedrooms: 4,
+      bathrooms: 5,
+      description: 'Panoramic views overlooking the sacred skyline and lush green expressway corridor. Spans an expansive duplex layout with floor-to-ceiling soundproof glass, open sky deck with private plunge pool, and designer modular kitchen.',
+      amenities: ['Sky Deck & Plunge Pool', 'Panoramic Temple Skyline Views', 'High-speed Elevators', 'Clubhouse & Gym', 'Covered Reserved Parking', '24/7 CCTV & Security', 'Piped Gas Connection'],
+      images: [
+        '/images/property_penthouse_modern_1792413400841.jpg',
+        '/images/about_architecture_craft_1792413399389.jpg',
+        '/images/hero_luxury_villa_1792413398505.jpg'
+      ],
+      primaryImage: '/images/property_penthouse_modern_1792413400841.jpg',
+      featured: true,
+      published: true,
+      status: 'Available',
+      createdAt: '2026-01-20T08:30:00Z',
+      updatedAt: '2026-02-28T14:15:00Z'
+    },
+    {
+      id: 'prop-3',
+      title: 'Prime Commercial Corner Complex',
+      slug: 'prime-commercial-corner-complex',
+      price: 62000000,
+      priceDisplay: '₹6.20 Cr',
+      propertyType: 'Commercial Space',
+      purpose: 'Sale',
+      location: 'Mandi Choraha Junction, Mathura',
+      city: 'Mathura',
+      state: 'Uttar Pradesh',
+      pincode: '281004',
+      areaSqFt: 8400,
+      bedrooms: 0,
+      bathrooms: 8,
+      description: 'High-footfall commercial property at the bustling Mandi Choraha junction. Ideal for bank branches, retail anchor stores, healthcare diagnostic centres, or corporate regional headquarters with dual road frontage and high commercial rental yield.',
+      amenities: ['Dual Road Frontage', 'Basement Customer Parking', 'Heavy Power Load Sanction', 'Fire Safety NOC', 'High Footfall Zone', 'High Rental Yield Potential'],
+      images: [
+        '/images/about_architecture_craft_1792413399389.jpg',
+        '/images/hero_luxury_villa_1792413398505.jpg'
+      ],
+      primaryImage: '/images/about_architecture_craft_1792413399389.jpg',
+      featured: true,
+      published: true,
+      status: 'Available',
+      createdAt: '2026-02-05T09:00:00Z',
+      updatedAt: '2026-03-02T11:20:00Z'
+    },
+    {
+      id: 'prop-4',
+      title: 'Green Meadows Gated Residential Plot',
+      slug: 'green-meadows-gated-residential-plot',
+      price: 8500000,
+      priceDisplay: '₹85 Lakhs',
+      propertyType: 'Plot / Land',
+      purpose: 'Sale',
+      location: 'Near Narsi Vihar Enclave, Mathura',
+      city: 'Mathura',
+      state: 'Uttar Pradesh',
+      pincode: '281004',
+      areaSqFt: 2700,
+      bedrooms: 0,
+      bathrooms: 0,
+      description: 'Freehold, 300 sq. yard east-facing residential plot in a premium gated township. Complete underground electrical wiring, wide 40-foot paved blacktop roads, dedicated park frontage, and immediate municipal registry verification.',
+      amenities: ['East Facing Vastu', 'Gated Community with Guardhouse', 'Wide 40ft Internal Roads', 'Underground Utilities', 'Immediate Registry & Mutation', 'Park Facing'],
+      images: [
+        '/images/hero_luxury_villa_1792413398505.jpg',
+        '/images/about_architecture_craft_1792413399389.jpg'
+      ],
+      primaryImage: '/images/hero_luxury_villa_1792413398505.jpg',
+      featured: false,
+      published: true,
+      status: 'Available',
+      createdAt: '2026-02-18T14:00:00Z',
+      updatedAt: '2026-03-05T10:00:00Z'
+    },
+    {
+      id: 'prop-5',
+      title: 'Yamuna Expressway Commercial Logistics Corridor',
+      slug: 'yamuna-expressway-commercial-logistics-corridor',
+      price: 95000000,
+      priceDisplay: '₹9.50 Cr',
+      propertyType: 'Plot / Land',
+      purpose: 'Sale',
+      location: 'NH-19 / Yamuna Link Corridor, Mathura',
+      city: 'Mathura',
+      state: 'Uttar Pradesh',
+      pincode: '281006',
+      areaSqFt: 43560,
+      bedrooms: 0,
+      bathrooms: 0,
+      description: '1 Acre contiguous industrial/commercial plot with direct expressway connectivity. High strategic appreciation near upcoming Jewar International Airport link and logistics hub.',
+      amenities: ['Direct Highway Frontage', 'Industrial Zone Clearance', 'Clear Title Record', 'Heavy Vehicle Ingress', 'Water & Grid Access'],
+      images: [
+        '/images/hero_luxury_villa_1792413398505.jpg'
+      ],
+      primaryImage: '/images/hero_luxury_villa_1792413398505.jpg',
+      featured: false,
+      published: true,
+      status: 'Available',
+      createdAt: '2026-01-10T11:00:00Z',
+      updatedAt: '2026-02-15T16:00:00Z'
+    },
+    {
+      id: 'prop-6',
+      title: 'Boutique Luxury Apartment at Civil Lines',
+      slug: 'boutique-luxury-apartment-civil-lines',
+      price: 65000,
+      priceDisplay: '₹65,000 / mo',
+      propertyType: 'Apartment',
+      purpose: 'Rent',
+      location: 'Civil Lines, Mathura',
+      city: 'Mathura',
+      state: 'Uttar Pradesh',
+      pincode: '281001',
+      areaSqFt: 2200,
+      bedrooms: 3,
+      bathrooms: 3,
+      description: 'Fully furnished luxury residence in the most peaceful, tree-lined residential enclave of Mathura. Equipped with premium teak wood furnishings, VRV air conditioning, and 24-hour maintenance team.',
+      amenities: ['Fully Furnished Designer Interiors', 'VRV Air Conditioning', 'Covered Stilt Parking', 'Full Power Backup', 'Round-the-Clock Security'],
+      images: [
+        '/images/property_penthouse_modern_1792413400841.jpg',
+        '/images/about_architecture_craft_1792413399389.jpg'
+      ],
+      primaryImage: '/images/property_penthouse_modern_1792413400841.jpg',
+      featured: false,
+      published: true,
+      status: 'Available',
+      createdAt: '2026-02-22T10:00:00Z',
+      updatedAt: '2026-03-04T09:30:00Z'
+    }
+  ],
+  owners: [
+    {
+      id: 'owner-1',
+      name: 'Shri J. Goyal',
+      designation: 'Founder & Managing Director',
+      bio: 'With over 24 years of pioneering real estate stewardship in Uttar Pradesh and NCR, Shri J. Goyal is recognized for steadfast ethics, impeccable legal diligence, and transformational land advisory. Under his visionary leadership, Shri Goyal Associates has established an unimpeachable reputation for verified titles, transparent advisory, and enduring client relationships spanning generations.',
+      experience: '24+ Years Real Estate Stewardship',
+      areasOfExpertise: [
+        'High-Value Land & Farmhouse Acquisition',
+        'Commercial Real Estate Development',
+        'Title Due Diligence & Legal Verification',
+        'Strategic Real Estate Wealth Advisory'
+      ],
+      phone: '+91 9012792020',
+      email: 'jgoyal@gmail.com',
+      photoUrl: '/images/owner_portrait_one_1792413400191.jpg',
+      linkedin: 'https://linkedin.com',
+      twitter: 'https://twitter.com',
+      orderIndex: 1,
+      published: true,
+      createdAt: '2026-01-01T00:00:00Z'
+    },
+    {
+      id: 'owner-2',
+      name: 'Partner & Co-Director',
+      designation: 'Director of Property Operations & Client Relations',
+      bio: 'Leading market development, institutional relations, and residential portfolio strategy, this director brings 14+ years of modern property analytics and white-glove advisory to the firm. Specializing in gated luxury townships, corporate leasing, and high-growth investment corridors across Mathura, Vrindavan, and NCR.',
+      experience: '14+ Years Property Consultation',
+      areasOfExpertise: [
+        'Luxury Residential Villas & Penthouses',
+        'Gated Township Developments',
+        'Corporate & Commercial Leasing',
+        'NRI Property Advisory & Management'
+      ],
+      phone: '+91 9012792020',
+      email: 'jgoyal@gmail.com',
+      photoUrl: '/images/owner_portrait_two_1792413400739.jpg',
+      linkedin: 'https://linkedin.com',
+      twitter: 'https://twitter.com',
+      orderIndex: 2,
+      published: true,
+      createdAt: '2026-01-01T00:00:00Z'
+    }
+  ],
+  services: [
+    {
+      id: 'srv-1',
+      title: 'Residential Property Buying & Selling',
+      shortDescription: 'Bespoke advisory for luxury villas, gated homes, modern apartments, and premium independent floors.',
+      detailedDescription: 'From architectural heritage bungalows to contemporary gated enclaves, we assist clients in identifying, negotiating, and acquiring homes that reflect their stature. Every listing is thoroughly audited for clear title documentation, municipal compliance, and fair market valuation.',
+      icon: 'Home',
+      orderIndex: 1,
+      published: true
+    },
+    {
+      id: 'srv-2',
+      title: 'Commercial Real Estate & Retail',
+      shortDescription: 'High-footfall commercial plots, retail spaces, corporate offices, and roadside showrooms.',
+      detailedDescription: 'Mathura and the NCR corridor are experiencing unprecedented commercial expansion. We advise businesses and investors on acquiring high-yield commercial assets, corner plots, and anchor retail properties with high rental potential.',
+      icon: 'Building2',
+      orderIndex: 2,
+      published: true
+    },
+    {
+      id: 'srv-3',
+      title: 'Land & Plot Consultancy',
+      shortDescription: 'Legally verified residential, agricultural, and industrial land parcels with clear titles.',
+      detailedDescription: 'Land acquisition demands rigorous scrutiny. We conduct multi-decade title searches, municipal master-plan zoning verifications, and boundary demarcation surveys before recommending any land asset.',
+      icon: 'MapPin',
+      orderIndex: 3,
+      published: true
+    },
+    {
+      id: 'srv-4',
+      title: 'Rental & Leasing Assistance',
+      shortDescription: 'Premium residential rentals and structured commercial long-term leases.',
+      detailedDescription: 'Seamless tenant onboarding, structured lease agreements, and corporate client matching for both owners seeking trustworthy tenants and corporate clients requiring premium spaces.',
+      icon: 'Key',
+      orderIndex: 4,
+      published: true
+    },
+    {
+      id: 'srv-5',
+      title: 'Investment Property Consultation',
+      shortDescription: 'Data-backed capital appreciation analysis along high-growth infrastructure corridors.',
+      detailedDescription: 'Targeted advisory along the Yamuna Expressway, NH-19, and Vrindavan growth belts. We identify high-ROI opportunities before they reach mainstream market saturation.',
+      icon: 'TrendingUp',
+      orderIndex: 5,
+      published: true
+    },
+    {
+      id: 'srv-6',
+      title: 'Curated Property Site Visits',
+      shortDescription: 'Chauffeured, private site inspections led by senior property specialists.',
+      detailedDescription: 'Experience properties firsthand with an experienced advisor who provides honest insights on neighbourhood development, connectivity, infrastructure timelines, and architectural quality.',
+      icon: 'Compass',
+      orderIndex: 6,
+      published: true
+    }
+  ],
+  testimonials: [
+    {
+      id: 'test-1',
+      clientName: 'Rajesh Agrawal',
+      designation: 'Managing Director, Agrawal Textiles',
+      propertyOrLocation: 'Commercial Asset, Mandi Choraha',
+      rating: 5,
+      comment: 'Shri Goyal Associates facilitated our commercial property acquisition with absolute transparency. Their knowledge of title clearance in Mathura is unmatched. A truly dependable advisory firm.',
+      published: true,
+      createdAt: '2026-01-14T00:00:00Z'
+    },
+    {
+      id: 'test-2',
+      clientName: 'Dr. Vivek Sharma & Family',
+      designation: 'Senior Orthopaedic Surgeon',
+      propertyOrLocation: 'Luxury Villa, Narsi Vihar Area',
+      rating: 5,
+      comment: 'Finding a home with clear legal papers and peaceful surroundings felt daunting until we met Shri Goyal Associates. They walked us through every step and treated us like family.',
+      published: true,
+      createdAt: '2026-02-02T00:00:00Z'
+    },
+    {
+      id: 'test-3',
+      clientName: 'Sanjay Bansal',
+      designation: 'NRI Investor, Dubai',
+      propertyOrLocation: 'Vrindavan Expressway Penthouse',
+      rating: 5,
+      comment: 'Investing in Indian real estate from abroad can be stressful, but the Goyal Associates team provided digital documentation, video walkthroughs, and flawless execution. Outstanding professionalism.',
+      published: true,
+      createdAt: '2026-02-20T00:00:00Z'
+    }
+  ],
+  enquiries: [
+    {
+      id: 'enq-1',
+      fullName: 'Pradeep Mehra',
+      phone: '+91 9837102233',
+      email: 'pradeep.mehra@example.com',
+      enquiryType: 'Property Purchase',
+      propertyId: 'prop-1',
+      propertyTitle: 'The Sovereign Villa & Private Estate',
+      message: 'Hello, I am interested in scheduling a private site visit this upcoming Saturday for the Sovereign Villa. Please confirm advisor availability.',
+      status: 'new',
+      createdAt: '2026-03-08T11:45:00Z'
+    }
+  ],
+  media: [
+    {
+      id: 'med-1',
+      filename: 'hero_luxury_villa_1792413398505.jpg',
+      originalName: 'hero_luxury_villa.jpg',
+      mimeType: 'image/jpeg',
+      size: 524288,
+      url: '/images/hero_luxury_villa_1792413398505.jpg',
+      category: 'hero',
+      createdAt: '2026-03-01T00:00:00Z'
+    },
+    {
+      id: 'med-2',
+      filename: 'about_architecture_craft_1792413399389.jpg',
+      originalName: 'about_architecture_craft.jpg',
+      mimeType: 'image/jpeg',
+      size: 421000,
+      url: '/images/about_architecture_craft_1792413399389.jpg',
+      category: 'general',
+      createdAt: '2026-03-01T00:00:00Z'
+    },
+    {
+      id: 'med-3',
+      filename: 'owner_portrait_one_1792413400191.jpg',
+      originalName: 'owner_portrait_one.jpg',
+      mimeType: 'image/jpeg',
+      size: 380000,
+      url: '/images/owner_portrait_one_1792413400191.jpg',
+      category: 'owner',
+      createdAt: '2026-03-01T00:00:00Z'
+    },
+    {
+      id: 'med-4',
+      filename: 'owner_portrait_two_1792413400739.jpg',
+      originalName: 'owner_portrait_two.jpg',
+      mimeType: 'image/jpeg',
+      size: 360000,
+      url: '/images/owner_portrait_two_1792413400739.jpg',
+      category: 'owner',
+      createdAt: '2026-03-01T00:00:00Z'
+    },
+    {
+      id: 'med-5',
+      filename: 'property_penthouse_modern_1792413400841.jpg',
+      originalName: 'property_penthouse_modern.jpg',
+      mimeType: 'image/jpeg',
+      size: 610000,
+      url: '/images/property_penthouse_modern_1792413400841.jpg',
+      category: 'property',
+      createdAt: '2026-03-01T00:00:00Z'
+    }
+  ]
+};
+
+export class LocalDatabase {
+  private data: LocalDbSchema;
+
+  constructor() {
+    this.data = this.load();
+  }
+
+  private sanitizeUrl(url: string | undefined): string {
+    if (!url) return '';
+    return url
+      .replace(/^\/src\/assets\/images\//, '/images/')
+      .replace(/^\/assets\/images\//, '/images/')
+      .replace(/^\/public\/images\//, '/images/');
+  }
+
+  private load(): LocalDbSchema {
+    let result: LocalDbSchema = initialLocalData;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        result = {
+          siteSettings: { ...initialLocalData.siteSettings, ...parsed.siteSettings },
+          properties: parsed.properties && parsed.properties.length > 0 ? parsed.properties : initialLocalData.properties,
+          owners: parsed.owners && parsed.owners.length > 0 ? parsed.owners : initialLocalData.owners,
+          services: parsed.services || initialLocalData.services,
+          testimonials: parsed.testimonials || initialLocalData.testimonials,
+          enquiries: parsed.enquiries || initialLocalData.enquiries,
+          media: parsed.media || initialLocalData.media
+        };
+      }
+    } catch {
+      result = initialLocalData;
+    }
+
+    // Sanitize all image URLs to make sure they resolve to /images/
+    if (result.siteSettings) {
+      result.siteSettings.heroBgImage = this.sanitizeUrl(result.siteSettings.heroBgImage);
+      result.siteSettings.aboutImage = this.sanitizeUrl(result.siteSettings.aboutImage);
+    }
+    if (result.properties) {
+      result.properties = result.properties.map(p => ({
+        ...p,
+        primaryImage: this.sanitizeUrl(p.primaryImage),
+        images: (p.images || []).map(img => this.sanitizeUrl(img))
+      }));
+    }
+    if (result.owners) {
+      result.owners = result.owners.map(o => ({
+        ...o,
+        photoUrl: this.sanitizeUrl(o.photoUrl)
+      }));
+    }
+    if (result.media) {
+      result.media = result.media.map(m => ({
+        ...m,
+        url: this.sanitizeUrl(m.url)
+      }));
+    }
+
+    this.save(result);
+    return result;
+  }
+
+  private save(data: LocalDbSchema) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (e) {
+      console.warn('LocalStorage save failed:', e);
+    }
+  }
+
+  public getSettings(): SiteSettings {
+    return this.data.siteSettings;
+  }
+
+  public updateSettings(partial: Partial<SiteSettings>): SiteSettings {
+    this.data.siteSettings = { ...this.data.siteSettings, ...partial };
+    this.save(this.data);
+    return this.data.siteSettings;
+  }
+
+  public getProperties(includeUnpublished = false): Property[] {
+    if (includeUnpublished) return this.data.properties;
+    return this.data.properties.filter(p => p.published);
+  }
+
+  public getPropertyById(id: string, includeUnpublished = false): Property | null {
+    const prop = this.data.properties.find(p => p.id === id || p.slug === id);
+    if (!prop) return null;
+    if (!prop.published && !includeUnpublished) return null;
+    return prop;
+  }
+
+  public createProperty(propData: any): Property {
+    const newProp: Property = {
+      ...propData,
+      id: `prop-${Date.now()}`,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    this.data.properties.unshift(newProp);
+    this.save(this.data);
+    return newProp;
+  }
+
+  public updateProperty(id: string, partial: Partial<Property>): Property | null {
+    const idx = this.data.properties.findIndex(p => p.id === id);
+    if (idx === -1) return null;
+    this.data.properties[idx] = { ...this.data.properties[idx], ...partial, id, updatedAt: new Date().toISOString() };
+    this.save(this.data);
+    return this.data.properties[idx];
+  }
+
+  public deleteProperty(id: string): boolean {
+    const idx = this.data.properties.findIndex(p => p.id === id);
+    if (idx === -1) return false;
+    this.data.properties.splice(idx, 1);
+    this.save(this.data);
+    return true;
+  }
+
+  public duplicateProperty(id: string): Property | null {
+    const original = this.data.properties.find(p => p.id === id);
+    if (!original) return null;
+    const duplicated: Property = {
+      ...original,
+      id: `prop-${Date.now()}`,
+      title: `${original.title} (Copy)`,
+      slug: `${original.slug}-copy-${Date.now().toString().slice(-4)}`,
+      published: false,
+      featured: false,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    this.data.properties.unshift(duplicated);
+    this.save(this.data);
+    return duplicated;
+  }
+
+  public getOwners(includeUnpublished = false): Owner[] {
+    const list = includeUnpublished ? this.data.owners : this.data.owners.filter(o => o.published);
+    return [...list].sort((a, b) => a.orderIndex - b.orderIndex);
+  }
+
+  public createOwner(ownerData: any): Owner {
+    const newOwner: Owner = {
+      ...ownerData,
+      id: `owner-${Date.now()}`,
+      createdAt: new Date().toISOString()
+    };
+    this.data.owners.push(newOwner);
+    this.save(this.data);
+    return newOwner;
+  }
+
+  public updateOwner(id: string, partial: Partial<Owner>): Owner | null {
+    const idx = this.data.owners.findIndex(o => o.id === id);
+    if (idx === -1) return null;
+    this.data.owners[idx] = { ...this.data.owners[idx], ...partial, id };
+    this.save(this.data);
+    return this.data.owners[idx];
+  }
+
+  public deleteOwner(id: string): boolean {
+    const idx = this.data.owners.findIndex(o => o.id === id);
+    if (idx === -1) return false;
+    this.data.owners.splice(idx, 1);
+    this.save(this.data);
+    return true;
+  }
+
+  public getServices(includeUnpublished = false): Service[] {
+    const list = includeUnpublished ? this.data.services : this.data.services.filter(s => s.published);
+    return [...list].sort((a, b) => a.orderIndex - b.orderIndex);
+  }
+
+  public updateService(id: string, partial: Partial<Service>): Service | null {
+    const idx = this.data.services.findIndex(s => s.id === id);
+    if (idx === -1) return null;
+    this.data.services[idx] = { ...this.data.services[idx], ...partial, id };
+    this.save(this.data);
+    return this.data.services[idx];
+  }
+
+  public getTestimonials(includeUnpublished = false): Testimonial[] {
+    if (includeUnpublished) return this.data.testimonials;
+    return this.data.testimonials.filter(t => t.published);
+  }
+
+  public createTestimonial(testData: any): Testimonial {
+    const item: Testimonial = {
+      ...testData,
+      id: `test-${Date.now()}`,
+      createdAt: new Date().toISOString()
+    };
+    this.data.testimonials.unshift(item);
+    this.save(this.data);
+    return item;
+  }
+
+  public updateTestimonial(id: string, partial: Partial<Testimonial>): Testimonial | null {
+    const idx = this.data.testimonials.findIndex(t => t.id === id);
+    if (idx === -1) return null;
+    this.data.testimonials[idx] = { ...this.data.testimonials[idx], ...partial, id };
+    this.save(this.data);
+    return this.data.testimonials[idx];
+  }
+
+  public deleteTestimonial(id: string): boolean {
+    const idx = this.data.testimonials.findIndex(t => t.id === id);
+    if (idx === -1) return false;
+    this.data.testimonials.splice(idx, 1);
+    this.save(this.data);
+    return true;
+  }
+
+  public getEnquiries(): Enquiry[] {
+    return this.data.enquiries;
+  }
+
+  public createEnquiry(enqData: any): Enquiry {
+    const newEnq: Enquiry = {
+      ...enqData,
+      id: `enq-${Date.now()}`,
+      status: 'new',
+      createdAt: new Date().toISOString()
+    };
+    this.data.enquiries.unshift(newEnq);
+    this.save(this.data);
+    return newEnq;
+  }
+
+  public updateEnquiry(id: string, partial: Partial<Enquiry>): Enquiry | null {
+    const idx = this.data.enquiries.findIndex(e => e.id === id);
+    if (idx === -1) return null;
+    this.data.enquiries[idx] = { ...this.data.enquiries[idx], ...partial, id };
+    this.save(this.data);
+    return this.data.enquiries[idx];
+  }
+
+  public deleteEnquiry(id: string): boolean {
+    const idx = this.data.enquiries.findIndex(e => e.id === id);
+    if (idx === -1) return false;
+    this.data.enquiries.splice(idx, 1);
+    this.save(this.data);
+    return true;
+  }
+
+  public getMedia(): MediaItem[] {
+    return this.data.media;
+  }
+
+  public addMedia(item: any): MediaItem {
+    const mediaItem: MediaItem = {
+      ...item,
+      id: `med-${Date.now()}`,
+      createdAt: new Date().toISOString()
+    };
+    this.data.media.unshift(mediaItem);
+    this.save(this.data);
+    return mediaItem;
+  }
+
+  public deleteMedia(id: string): boolean {
+    const idx = this.data.media.findIndex(m => m.id === id);
+    if (idx === -1) return false;
+    this.data.media.splice(idx, 1);
+    this.save(this.data);
+    return true;
+  }
+
+  public getStats() {
+    const totalProperties = this.data.properties.length;
+    const publishedProperties = this.data.properties.filter(p => p.published).length;
+    const draftProperties = totalProperties - publishedProperties;
+    const totalEnquiries = this.data.enquiries.length;
+    const newEnquiries = this.data.enquiries.filter(e => e.status === 'new').length;
+    const totalOwners = this.data.owners.length;
+
+    return {
+      totalProperties,
+      publishedProperties,
+      draftProperties,
+      totalEnquiries,
+      newEnquiries,
+      totalOwners
+    };
+  }
+}
+
+export const localDb = new LocalDatabase();

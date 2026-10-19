@@ -12,6 +12,7 @@ import {
   Clock
 } from 'lucide-react';
 import { useSettings } from '../context/SettingsContext';
+import { apiFetch } from '../services/apiBridge';
 
 export const ContactPage: React.FC = () => {
   const { settings, phoneUrl, emailUrl, whatsappUrl, formattedAddress } = useSettings();
@@ -38,7 +39,7 @@ export const ContactPage: React.FC = () => {
 
     try {
       setIsSubmitting(true);
-      const res = await fetch('/api/enquiries', {
+      const res = await apiFetch('/api/enquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -57,11 +57,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           <div className="lg:col-span-6">
             <div className="rounded-3xl overflow-hidden border border-[#c5a880]/30 aspect-[4/3] shadow-2xl">
               <img
-                src={settings.aboutImage || '/src/assets/images/about_architecture_craft_1792413399389.jpg'}
+                src={settings.aboutImage || '/images/about_architecture_craft_1792413399389.jpg'}
                 alt="Shri Goyal Associates Architecture & Lounge"
                 referrerPolicy="no-referrer"
                 onError={(e) => {
-                  e.currentTarget.src = '/src/assets/images/about_architecture_craft_1792413399389.jpg';
+                  const fallback = '/images/about_architecture_craft_1792413399389.jpg';
+                  if (e.currentTarget.src !== window.location.origin + fallback) {
+                    e.currentTarget.src = fallback;
+                  }
                 }}
                 className="w-full h-full object-cover"
               />

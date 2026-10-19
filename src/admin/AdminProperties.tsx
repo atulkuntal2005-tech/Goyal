@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Property } from '../types';
 import { useAuth } from '../context/AuthContext';
+import { apiFetch } from '../services/apiBridge';
 
 interface AdminPropertiesProps {
   initialOpenModal?: boolean;
@@ -47,8 +48,8 @@ export const AdminProperties: React.FC<AdminPropertiesProps> = ({ initialOpenMod
     bathrooms: 4,
     description: '',
     amenities: ['100% Power Backup', 'Clear Title Deed', '24/7 Security'],
-    images: ['/src/assets/images/hero_luxury_villa_1792413398505.jpg'],
-    primaryImage: '/src/assets/images/hero_luxury_villa_1792413398505.jpg',
+    images: ['/images/hero_luxury_villa_1792413398505.jpg'],
+    primaryImage: '/images/hero_luxury_villa_1792413398505.jpg',
     featured: false,
     published: true,
     status: 'Available' as Property['status']
@@ -62,7 +63,7 @@ export const AdminProperties: React.FC<AdminPropertiesProps> = ({ initialOpenMod
   const fetchProperties = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/admin/properties', {
+      const res = await apiFetch('/api/admin/properties', {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.ok) {
@@ -97,8 +98,8 @@ export const AdminProperties: React.FC<AdminPropertiesProps> = ({ initialOpenMod
       bathrooms: 4,
       description: 'Prestigious luxury villa located in an exclusive enclave in Mathura. Complete clear title documentation and immediate registry facilitation.',
       amenities: ['100% Power Backup', 'Clear Title Deed', '24/7 Gated Security', 'Vastu Compliant', 'Italian Marble Flooring'],
-      images: ['/src/assets/images/hero_luxury_villa_1792413398505.jpg'],
-      primaryImage: '/src/assets/images/hero_luxury_villa_1792413398505.jpg',
+      images: ['/images/hero_luxury_villa_1792413398505.jpg'],
+      primaryImage: '/images/hero_luxury_villa_1792413398505.jpg',
       featured: true,
       published: true,
       status: 'Available'
@@ -136,7 +137,7 @@ export const AdminProperties: React.FC<AdminPropertiesProps> = ({ initialOpenMod
 
   const handleTogglePublish = async (prop: Property) => {
     try {
-      const res = await fetch(`/api/properties/${prop.id}`, {
+      const res = await apiFetch(`/api/properties/${prop.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -156,7 +157,7 @@ export const AdminProperties: React.FC<AdminPropertiesProps> = ({ initialOpenMod
 
   const handleToggleFeature = async (prop: Property) => {
     try {
-      const res = await fetch(`/api/properties/${prop.id}`, {
+      const res = await apiFetch(`/api/properties/${prop.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -176,7 +177,7 @@ export const AdminProperties: React.FC<AdminPropertiesProps> = ({ initialOpenMod
 
   const handleDuplicate = async (prop: Property) => {
     try {
-      const res = await fetch(`/api/properties/${prop.id}/duplicate`, {
+      const res = await apiFetch(`/api/properties/${prop.id}/duplicate`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -193,7 +194,7 @@ export const AdminProperties: React.FC<AdminPropertiesProps> = ({ initialOpenMod
     if (!window.confirm(`Are you sure you want to permanently delete "${prop.title}"?`)) return;
 
     try {
-      const res = await fetch(`/api/properties/${prop.id}`, {
+      const res = await apiFetch(`/api/properties/${prop.id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -237,12 +238,12 @@ export const AdminProperties: React.FC<AdminPropertiesProps> = ({ initialOpenMod
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const data = new FormData();
-    data.append('file', file);
-    data.append('category', 'property');
-
     try {
-      const res = await fetch('/api/media/upload', {
+      const data = new FormData();
+      data.append('file', file);
+      data.append('category', 'property');
+
+      const res = await apiFetch('/api/media/upload', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
         body: data
@@ -254,9 +255,25 @@ export const AdminProperties: React.FC<AdminPropertiesProps> = ({ initialOpenMod
           images: [...prev.images, item.url],
           primaryImage: prev.primaryImage || item.url
         }));
+        return;
       }
     } catch (err) {
-      console.error('File upload failed:', err);
+      console.warn('API file upload failed, falling back to local base64:', err);
+    }
+
+    try {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64Url = reader.result as string;
+        setFormData((prev) => ({
+          ...prev,
+          images: [...prev.images, base64Url],
+          primaryImage: prev.primaryImage || base64Url
+        }));
+      };
+      reader.readAsDataURL(file);
+    } catch (readErr) {
+      console.error('File read error:', readErr);
     }
   };
 
@@ -269,7 +286,7 @@ export const AdminProperties: React.FC<AdminPropertiesProps> = ({ initialOpenMod
       const url = editingProp ? `/api/properties/${editingProp.id}` : '/api/properties';
       const method = editingProp ? 'PUT' : 'POST';
 
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
@@ -385,8 +402,14 @@ export const AdminProperties: React.FC<AdminPropertiesProps> = ({ initialOpenMod
                   <td className="py-3.5 px-4">
                     <div className="flex items-center gap-3">
                       <img
-                        src={prop.primaryImage || '/src/assets/images/hero_luxury_villa_1792413398505.jpg'}
+                        src={prop.primaryImage || '/images/hero_luxury_villa_1792413398505.jpg'}
                         alt={prop.title}
+                        onError={(e) => {
+                          const fallback = '/images/hero_luxury_villa_1792413398505.jpg';
+                          if (e.currentTarget.src !== window.location.origin + fallback) {
+                            e.currentTarget.src = fallback;
+                          }
+                        }}
                         className="w-12 h-10 rounded-lg object-cover bg-[#1c1f2b] shrink-0"
                       />
                       <div className="min-w-0">

@@ -18,11 +18,14 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onSelect, 
       {/* Property Image & Status Badges */}
       <div className="relative aspect-[16/10] overflow-hidden bg-[#1a1c24]">
         <img
-          src={property.primaryImage || property.images[0] || '/src/assets/images/hero_luxury_villa_1792413398505.jpg'}
+          src={property.primaryImage || property.images[0] || '/images/hero_luxury_villa_1792413398505.jpg'}
           alt={property.title}
           referrerPolicy="no-referrer"
           onError={(e) => {
-            e.currentTarget.src = '/src/assets/images/hero_luxury_villa_1792413398505.jpg';
+            const fallback = '/images/hero_luxury_villa_1792413398505.jpg';
+            if (e.currentTarget.src !== window.location.origin + fallback) {
+              e.currentTarget.src = fallback;
+            }
           }}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />

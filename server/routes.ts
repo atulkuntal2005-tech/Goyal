@@ -241,7 +241,7 @@ apiRouter.post('/properties', requireAdmin, (req, res) => {
       description: description || '',
       amenities: Array.isArray(req.body.amenities) ? req.body.amenities : [],
       images: Array.isArray(req.body.images) ? req.body.images : [],
-      primaryImage: req.body.primaryImage || req.body.images?.[0] || '/src/assets/images/hero_luxury_villa_1792413398505.jpg',
+      primaryImage: req.body.primaryImage || req.body.images?.[0] || '/images/hero_luxury_villa_1792413398505.jpg',
       featured: Boolean(req.body.featured),
       published: req.body.published !== undefined ? Boolean(req.body.published) : true,
       status: req.body.status || 'Available'
@@ -300,7 +300,7 @@ apiRouter.post('/owners', requireAdmin, (req, res) => {
     areasOfExpertise: Array.isArray(req.body.areasOfExpertise) ? req.body.areasOfExpertise : [],
     phone: req.body.phone || '',
     email: req.body.email || '',
-    photoUrl: req.body.photoUrl || '/src/assets/images/owner_portrait_one_1792413400191.jpg',
+    photoUrl: req.body.photoUrl || '/images/owner_portrait_one_1792413400191.jpg',
     linkedin: req.body.linkedin || '',
     twitter: req.body.twitter || '',
     orderIndex: Number(req.body.orderIndex) || db.getOwners(true).length + 1,

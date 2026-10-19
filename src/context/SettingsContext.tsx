@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { SiteSettings } from '../types';
+import { appFetch } from '../services/apiBridge';
 
 interface SettingsContextType {
   settings: SiteSettings;
@@ -33,7 +34,7 @@ const defaultSettings: SiteSettings = {
   businessHours: 'Monday – Saturday: 9:30 AM – 7:30 PM, Sunday: By Appointment',
   heroHeadline: 'Find Your Dream Property with Shri Goyal Associates',
   heroSubtitle: 'Trusted Guidance. Exceptional Properties. Lasting Relationships.',
-  heroBgImage: '/src/assets/images/hero_luxury_villa_1792413398505.jpg',
+  heroBgImage: '/images/hero_luxury_villa_1792413398505.jpg',
   heroCta1Text: 'Explore Properties',
   heroCta1Link: '/properties',
   heroCta2Text: 'Contact Us',
@@ -48,7 +49,7 @@ const defaultSettings: SiteSettings = {
   aboutSubtitle: 'Built on transparency, local authority, and generational client trust.',
   aboutText: 'Founded on absolute transparency and unmatched regional insight, Shri Goyal Associates is Mathura and NCR’s premier real estate consultancy. For over two decades, our advisory firm has guided distinguished families, business entrepreneurs, and institutional investors through high-value residential acquisitions, commercial land developments, and legally verified plot transactions.',
   aboutExperienceYears: '24+',
-  aboutImage: '/src/assets/images/about_architecture_craft_1792413399389.jpg',
+  aboutImage: '/images/about_architecture_craft_1792413399389.jpg',
   whyChooseHeading: 'Why Discerning Clients Choose Shri Goyal Associates',
   whyChooseSubtitle: 'A legacy of meticulous diligence, verified titles, and white-glove advisory.',
   contactHeading: 'Let\'s Find the Right Property for You',
@@ -72,7 +73,7 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const fetchSettings = useCallback(async () => {
     try {
       setIsLoading(true);
-      const res = await fetch('/api/settings');
+      const res = await appFetch('/api/settings');
       if (!res.ok) throw new Error('Failed to load site settings');
       const data = await res.json();
       setSettings(data);

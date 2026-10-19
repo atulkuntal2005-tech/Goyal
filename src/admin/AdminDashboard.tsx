@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { DashboardStats, Enquiry, Property } from '../types';
 import { useAuth } from '../context/AuthContext';
+import { apiFetch } from '../services/apiBridge';
 
 interface AdminDashboardProps {
   onNavigateTab: (tab: string) => void;
@@ -33,9 +34,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigateTab, o
         setLoading(true);
         const headers = { Authorization: `Bearer ${token}` };
         const [statsRes, enqRes, propsRes] = await Promise.all([
-          fetch('/api/stats', { headers }),
-          fetch('/api/enquiries', { headers }),
-          fetch('/api/admin/properties', { headers })
+          apiFetch('/api/stats', { headers }),
+          apiFetch('/api/enquiries', { headers }),
+          apiFetch('/api/admin/properties', { headers })
         ]);
 
         if (statsRes.ok) setStats(await statsRes.json());
@@ -249,8 +250,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigateTab, o
             {recentProperties.map((p) => (
               <div key={p.id} className="py-3 flex items-center gap-3 text-xs">
                 <img
-                  src={p.primaryImage || '/src/assets/images/hero_luxury_villa_1792413398505.jpg'}
+                  src={p.primaryImage || '/images/hero_luxury_villa_1792413398505.jpg'}
                   alt={p.title}
+                  onError={(e) => {
+                    const fallback = '/images/hero_luxury_villa_1792413398505.jpg';
+                    if (e.currentTarget.src !== window.location.origin + fallback) {
+                      e.currentTarget.src = fallback;
+                    }
+                  }}
                   className="w-12 h-12 rounded-lg object-cover bg-[#1c1f2b] shrink-0"
                 />
                 <div className="flex-1 min-w-0">

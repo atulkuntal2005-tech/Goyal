@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Phone, Mail, Award, MessageCircle, ExternalLink, ShieldCheck } from 'lucide-react';
 import { Owner } from '../types';
 import { useSettings } from '../context/SettingsContext';
+import { apiFetch } from '../services/apiBridge';
 
 interface OwnersPageProps {
   onNavigate: (page: string) => void;
@@ -16,7 +17,7 @@ export const OwnersPage: React.FC<OwnersPageProps> = ({ onNavigate }) => {
     async function loadOwners() {
       try {
         setLoading(true);
-        const res = await fetch('/api/owners');
+        const res = await apiFetch('/api/owners');
         if (res.ok) {
           const data = await res.json();
           setOwners(data);
@@ -68,7 +69,10 @@ export const OwnersPage: React.FC<OwnersPageProps> = ({ onNavigate }) => {
                         alt={owner.name}
                         referrerPolicy="no-referrer"
                         onError={(e) => {
-                          e.currentTarget.src = '/src/assets/images/owner_portrait_one_1792413400191.jpg';
+                          const fallback = '/images/owner_portrait_one_1792413400191.jpg';
+                          if (e.currentTarget.src !== window.location.origin + fallback) {
+                            e.currentTarget.src = fallback;
+                          }
                         }}
                         className="w-full h-full object-cover"
                       />

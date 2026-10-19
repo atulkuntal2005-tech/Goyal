@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { AdminUser } from '../types';
+import { appFetch } from '../services/apiBridge';
 
 interface AuthContextType {
   adminUser: AdminUser | null;
@@ -42,7 +43,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
 
     try {
-      const res = await fetch('/api/auth/me', {
+      const res = await appFetch('/api/auth/me', {
         headers: {
           Authorization: `Bearer ${currentToken}`
         }
